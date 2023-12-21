@@ -29,6 +29,10 @@ export const putDb = async (content) => {
 };
 
 // TODO: Add logic for a method that gets all the content from the database
-export const getDb = async () => console.error('getDb not implemented');
+export const getDb = async () => {
+  const db = await initdb();
+  const tx = db.transaction('WebFlowText', 'readonly');
+  const store = tx.objectStore('WebFlowText');
+};
 
 initdb();
