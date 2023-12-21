@@ -17,6 +17,15 @@ export const putDb = async (content) => {
   const db = await initdb();
   const tx = db.transaction('WebFlowText', 'readwrite');
   const store = tx.objectStore('WebFlowText');
+
+  try {
+    const id = await store.put({ content });
+    console.log(`Content added to the database with ID ${id}`);
+  } catch (error) {
+    console.error('Error adding content to the database', error);
+  }
+
+  await tx.done;
 };
 
 // TODO: Add logic for a method that gets all the content from the database
