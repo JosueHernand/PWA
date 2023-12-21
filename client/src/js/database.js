@@ -1,46 +1,36 @@
 import { openDB } from 'idb';
 
 const initdb = async () =>
-  openDB('WebFlowText', 1, {
+  openDB('jate', 1, {
     upgrade(db) {
-      if (db.objectStoreNames.contains('WebFlowText')) {
-        console.log('WebFlowText database already exists');
+      if (db.objectStoreNames.contains('jate')) {
+        console.log('jate database already exists');
         return;
       }
-      db.createObjectStore('WebFlowText', { keyPath: 'id', autoIncrement: true });
-      console.log('WebFlowText database created');
+      db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
+      console.log('jate database created');
     },
   });
 
 export const putDb = async (content) => {
-  const db = await initdb();
-  const tx = db.transaction('WebFlowText', 'readwrite');
-  const store = tx.objectStore('WebFlowText');
-
-  try {
-    const id = await store.put({ content });
-    console.log(`Content added to the database with ID ${id}`);
-  } catch (error) {
-    console.error('Error adding content to the database', error);
-  }
-
-  await tx.done;
+  const jateDb = await openDB('jate', 1);
+  const tx = jateDb.transaction('jate', 'readwrite');
+  const store = tx.objectStore('jate');
+  const request = store.put({ id: 1, value: content });
+  const result = await request;
+  console.log('Data saved to the database', result.value);
 };
 
 export const getDb = async () => {
-  const db = await initdb();
-  const tx = db.transaction('WebFlowText', 'readonly');
-  const store = tx.objectStore('WebFlowText');
-
-  try {
-    const allContent = await store.getAll();
-    console.log('All content retrieved from the database:', allContent);
-    return allContent;
-  } catch (error) {
-    console.error('Error getting content from the database', error);
-  }
-
-  await tx.done;
+  const jateDb = await openDB('jate', 1);
+  const tx = jateDb.transaction('jate', 'readonly');
+  const store = tx.objectStore('jate');
+  const request = store.get(1);
+  const result = await request;
+  result
+    ? console.log('Data retrieved from the database', result.value)
+    : console.log('No data found in the database');
+  return result?.value;
 };
 
 initdb();
