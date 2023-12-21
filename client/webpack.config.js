@@ -23,6 +23,11 @@ module.exports = () => {
         title: 'Progressive Web App',
       }),
 
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js'
+      }),
+
     ],
 
     module: {
