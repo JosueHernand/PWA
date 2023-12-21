@@ -21,10 +21,15 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Usage
 
+Demo Video [Click Here](https://drive.google.com/file/d/1ssu8rjkXiqz5Rn50bX4EH7fcSRK_SP3x/view)  
 
-![jateDb](client/src/images/jateDb.png)
-![Manifest](client/src/images/manifest.png)
-![Workers](client/src/images/workers.png)
+Website Deployment [Click Here](https://webflowtext.onrender.com)  
+
+![jateDb](client/src/images/jateDb.png)  
+
+![Manifest](client/src/images/manifest.png)  
+
+![Workers](client/src/images/workers.png)  
 
 ## Credits
 
